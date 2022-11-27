@@ -1,0 +1,1 @@
+-d build/classes ./src/mst/Casa.java ./src/mst/Dados.java ./src/main/Escrita.java ./src/main/Leitura.java ./src/main/IOFile.java ./src/main/Solucao.java
