@@ -7,11 +7,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class IOFIle implements Leitura, Escrita{
+public class IOFile implements Leitura, Escrita{
     private String fileIn;
     private String caminhoAbsoluto = Solucao.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 
-    public IOFIle(String file) {
+    public IOFile(String file) {
         this.fileIn = file;
     }
     
