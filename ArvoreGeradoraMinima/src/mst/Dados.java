@@ -7,6 +7,7 @@ public class Dados {
     private int n;
     private int d;
     private List<Casa> casas = new ArrayList<>();
+    private List<Aresta> arestas = new ArrayList<>();
 
     public int getN() {
         return n;
@@ -28,7 +29,15 @@ public class Dados {
         return casas.get(num);
     }
 
-    public void setCasa(Casa casa){
+    public void addCasa(Casa casa){
         this.casas.add(casa);
+    }
+    
+    public void addAresta(Aresta aresta){
+        this.arestas.add(aresta);
+    }
+
+    public List<Aresta> getArestas() {
+        return arestas;
     }
 }

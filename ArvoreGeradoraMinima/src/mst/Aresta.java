@@ -16,6 +16,11 @@ public class Aresta implements Comparable<Aresta>, Comparator<Aresta>{
         this.casaB = casaB;
         this.custo = custo;
     }
+    
+    @Override
+    public String toString() {
+        return "\nAresta{" + "casaA=" + casaA.getChave() + ", casaB=" + casaB.getChave() + ", custo=" + custo + '}';
+    }
 
     public Casa getCasaA() {
         return casaA;

@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Solucao {
     public static void main(String[] args) {
         Dados dados = new Dados();
-        IOFIle io = new IOFIle(args[0]);
+        IOFile io = new IOFile(args[0]);
         io.lerDados(dados);
         
         dados.getCasa(0).setFilho(dados.getCasa(1));

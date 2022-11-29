@@ -6,13 +6,27 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.NoSuchElementException;
 
-public class IOFIle implements Leitura, Escrita{
+public class IOFile implements Leitura, Escrita{
     private String fileIn;
     private String caminhoAbsoluto = Solucao.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 
-    public IOFIle(String file) {
+    public IOFile(String file) {
         this.fileIn = file;
+    }
+    
+    private int validarValor(Scanner scan, int linhas){
+        String campo = scan.next();
+        int num = 0;
+        try {
+            num = Integer.parseInt(campo);
+        } catch (NumberFormatException e) {
+            System.out.println("Erro na linha "+linhas);
+            System.out.println("Arquivo "+fileIn+".txt contém caracteres incorretos!");
+            System.exit(0);
+        }
+        return num;
     }
     
     // Leitura dos dados
@@ -21,56 +35,47 @@ public class IOFIle implements Leitura, Escrita{
         String caminhoRelativo = "../../../data/";
         File file = new File(this.caminhoAbsoluto + caminhoRelativo + fileIn + ".txt");
 
-        Scanner scan;
-        if (!file.exists()) {
-            System.out.println("Nome de arquivo de entrada errado errado! - " + fileIn);
-            System.exit(0);
-        }
+        Scanner scan = null;
         try {
             scan = new Scanner(file);
-            int n = scan.nextInt();
+        } catch (FileNotFoundException e) {
+            System.out.println("Ops, o arquivo "+fileIn+".txt não foi encontrado, verifique a pasta data!");
+            System.exit(0);
+        }
+            
+        int lineNumber = 1;
+        try {
+            String valores = scan.nextLine();
+            Scanner scanLinha = new Scanner(valores);
+            
+            int n = validarValor(scanLinha, lineNumber);
             dados.setN(n);
-            dados.setD(scan.nextInt());
-            
+            dados.setD(validarValor(scanLinha, lineNumber));
+            lineNumber++;
+
             for (int i = 0; i < n; i++) {
-                dados.setCasa(new Casa(i+1));
-            }
-            
-            //Escreve numeros das casas
-            for (int i = 0; i < n; i++) {
-                System.out.println(dados.getCasa(i).getChave());
-            }
-            
-            int matriz[][] = new int[n][n];
-            int j = 0;
-            int k = 1;
-            for (int i = 0; i < n-1; i++) {
-                int l = k;
-                for (int ii = 0; ii < n-i-1; ii++) {
-                    int custo = scan.nextInt();
-                    matriz[j][l] = custo;
-                    matriz[l][j] = custo;
-                    l++;
-                }
-                j++;
-                k++;
+                dados.addCasa(new Casa(i+1));
             }
 
-            // Escreve matriz na tela
-            for (int i = 0; i < n; i++) {
-                for (int ii = 0; ii < n; ii++) {
-                    int custo = matriz[i][ii];
-                    System.out.print(custo);
-                    int algarismos=String.valueOf(custo).length();
-                    for (int l = 0; l < 4-algarismos; l++) {
-                        System.out.print(" ");
-                    }
+            for (int i = 1; i < n; i++) {
+                valores = scan.nextLine();
+                scanLinha = new Scanner(valores);
+                int k = i;
+                int ii;
+                for (ii = 0; ii < n-i; ii++) {
+                    int custo = validarValor(scanLinha, lineNumber);
+                    Aresta novaAresta = new Aresta(dados.getCasa(i-1), dados.getCasa(k), custo);
+                    dados.addAresta(novaAresta);
+                    k++;
                 }
-                System.out.println();
+                lineNumber++;
             }
+            System.out.println(dados.getArestas());
             
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (NoSuchElementException e) {
+            System.out.println("Erro na linha "+lineNumber);
+            System.out.println("Arquivo "+fileIn+".txt contém dados incompletos!");
+            System.exit(0);
         }
     }
     
