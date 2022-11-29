@@ -1,6 +1,6 @@
 package main;
-import mst.Dados;
+import mst.*;
 
 public interface Escrita {
-    void escreverSolucao();
+    void escreverSolucao(Casa cX);
 }

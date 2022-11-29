@@ -16,6 +16,7 @@ public class IOFIle implements Leitura, Escrita{
     }
     
     // Leitura dos dados
+    // @Override 
     public void lerDados(Dados dados){
         String caminhoRelativo = "../../../data/";
         File file = new File(this.caminhoAbsoluto + caminhoRelativo + fileIn + ".txt");
@@ -58,7 +59,12 @@ public class IOFIle implements Leitura, Escrita{
             // Escreve matriz na tela
             for (int i = 0; i < n; i++) {
                 for (int ii = 0; ii < n; ii++) {
-                    System.out.print(matriz[i][ii]+" ");
+                    int custo = matriz[i][ii];
+                    System.out.print(custo);
+                    int algarismos=String.valueOf(custo).length();
+                    for (int l = 0; l < 4-algarismos; l++) {
+                        System.out.print(" ");
+                    }
                 }
                 System.out.println();
             }
@@ -68,14 +74,53 @@ public class IOFIle implements Leitura, Escrita{
         }
     }
     
+    public static String espacador(String fill, int nivel){
+        String espaco="";
+        if(nivel!=1){
+            int ii=0;
+            for (int j = 0; j < nivel-1; j++){
+                String espacador="   ";
+                Character c = fill.charAt(ii);
+                if(c.equals('├') || c.equals('|')){
+                    espacador = "|  ";
+                }
+                ii+=3;
+                espaco = espaco.concat(espacador);
+            }
+        }
+        return espaco;
+    }
+    
+    public static String print(Casa cX, String fill, String saida, int nivel) {
+        if (cX != null) {
+            saida = saida.concat(fill + cX.getChave()+'\n');
+            String espaco=espacador(fill, nivel);
+            for (int i = 0; i < cX.getQtdFilhos(); i++) {
+                if (cX.getFilho(i)!= null) {
+                    String simbolo = "├──";
+                    if (i==cX.getQtdFilhos()-1) {
+                        simbolo = "└──";
+                    }
+                    
+                    fill = espaco+simbolo;
+                    saida = saida.concat(print(cX.getFilho(i), fill, "", nivel+1));
+                }
+            }
+        }
+        return saida;
+    }
+    
     // Escrita da solucao
-    public void escreverSolucao(){
+    // @Override
+    public void escreverSolucao(Casa cX){
         String caminhoRelativoSaida = "../../../out/solucao.txt";
         String caminhoSaida = this.caminhoAbsoluto + caminhoRelativoSaida;
         
         try {
             FileWriter escrever = new FileWriter(caminhoSaida);
-            String saida = "42";
+            String saida = "";
+            String fill = "";
+            saida = print(cX, fill, saida, 1);
             System.out.println(saida);
             escrever.write(saida);
             escrever.close();
