@@ -1,13 +1,12 @@
 package main;
 
-import mst.*; //importacao do pacote
-import java.util.Scanner;
+import arquivos.IOFile;
 
 /**
  *
  * @author Fabiana Pereira e Samuel Costa
  */
-public class Solucao {
+public class GeradorDeSolucao {
     public static void main(String[] args) {
         Dados dados = new Dados();
         IOFile io = new IOFile(args[0]);

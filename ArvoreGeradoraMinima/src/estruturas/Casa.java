@@ -1,4 +1,4 @@
-package mst;
+package estruturas;
 
 import java.util.ArrayList;
 import java.util.List;

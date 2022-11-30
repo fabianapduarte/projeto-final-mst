@@ -1,6 +1,9 @@
-package main;
+package arquivos;
 
-import mst.*; //importacao do pacote
+import arquivos.interfaces.*;
+import main.Dados;
+import estruturas.*;
+import main.GeradorDeSolucao;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,7 +13,7 @@ import java.util.NoSuchElementException;
 
 public class IOFile implements Leitura, Escrita{
     private String fileIn;
-    private String caminhoAbsoluto = Solucao.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+    private String caminhoAbsoluto = GeradorDeSolucao.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 
     public IOFile(String file) {
         this.fileIn = file;
@@ -62,7 +65,8 @@ public class IOFile implements Leitura, Escrita{
                 scanLinha = new Scanner(valores);
                 int k = i;
                 int ii;
-                for (ii = 0; ii < n-i; ii++) {
+                int total = n-i;
+                for (ii = 0; ii < total; ii++) {
                     int custo = validarValor(scanLinha, lineNumber);
                     Aresta novaAresta = new Aresta(dados.getCasa(i-1), dados.getCasa(k), custo);
                     dados.addAresta(novaAresta);

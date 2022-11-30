@@ -1,5 +1,7 @@
-package mst;
+package main;
 
+import estruturas.Casa;
+import estruturas.Aresta;
 import java.util.ArrayList;
 import java.util.List;
 

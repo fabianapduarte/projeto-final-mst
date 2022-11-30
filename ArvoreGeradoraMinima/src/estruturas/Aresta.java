@@ -1,4 +1,4 @@
-package mst;
+package estruturas;
 
 import java.util.Collection;
 import java.util.Comparator;

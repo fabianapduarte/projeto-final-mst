@@ -1,1 +1,1 @@
--classpath build/classes/ main.Solucao
+-classpath build/classes/ main.GeradorDeSolucao

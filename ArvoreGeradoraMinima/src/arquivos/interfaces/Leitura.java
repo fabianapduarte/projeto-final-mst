@@ -1,5 +1,5 @@
-package main;
-import mst.Dados;
+package arquivos.interfaces;
+import main.Dados;
 
 public interface Leitura {
     void lerDados(Dados dados);
