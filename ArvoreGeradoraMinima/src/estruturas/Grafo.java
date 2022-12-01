@@ -3,9 +3,10 @@ package estruturas;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Grafo {
+public class Grafo implements Comparable<Grafo>{
     private int numeroDeCasas;
     private int limiteDeConexoes;
+    private int custoTotal;
     private List<Casa> casas = new ArrayList<>();
     private List<Aresta> arestas = new ArrayList<>();
 
@@ -39,5 +40,18 @@ public class Grafo {
 
     public List<Aresta> getArestas() {
         return arestas;
+    }
+    
+    public int getCustoTotal() {
+        return custoTotal;
+    }
+
+    public void setCustoTotal(int custoTotal) {
+        this.custoTotal = custoTotal;
+    }
+
+    @Override
+    public int compareTo(Grafo grafoComparado) {
+        return Integer.compare(this.custoTotal, grafoComparado.custoTotal);
     }
 }

@@ -32,7 +32,7 @@ public class GeradorDeSolucao {
         } else {
             solucao = new SolucaoOrdenada();
         }
-        solucao.gerarArvore();
+        solucao.gerarArvores(grafo);
         io.escreverSolucao(grafo.getCasa(0));
     }
 }
