@@ -4,25 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Grafo {
-    private int n;
-    private int d;
+    private int numeroDeCasas;
+    private int limiteDeConexoes;
     private List<Casa> casas = new ArrayList<>();
     private List<Aresta> arestas = new ArrayList<>();
 
-    public int getN() {
-        return n;
+    public int getNumeroDeCasas() {
+        return numeroDeCasas;
     }
 
-    public void setN(int n) {
-        this.n = n;
+    public void setNumeroDeCasas(int numeroDeCasas) {
+        this.numeroDeCasas = numeroDeCasas;
     }
 
-    public int getD() {
-        return d;
+    public int getLimiteDeConexoes() {
+        return limiteDeConexoes;
     }
 
-    public void setD(int d) {
-        this.d = d;
+    public void setLimiteDeConexoes(int limiteDeConexoes) {
+        this.limiteDeConexoes = limiteDeConexoes;
     }
 
     public Casa getCasa(int num) {

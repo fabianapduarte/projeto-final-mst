@@ -50,21 +50,21 @@ public class IOFile implements Leitura, Escrita{
             String valores = scan.nextLine();
             Scanner scanLinha = new Scanner(valores);
             
-            int n = validarValor(scanLinha, lineNumber);
-            grafo.setN(n);
-            grafo.setD(validarValor(scanLinha, lineNumber));
+            int numeroDeCasas = validarValor(scanLinha, lineNumber);
+            grafo.setNumeroDeCasas(numeroDeCasas);
+            grafo.setLimiteDeConexoes(validarValor(scanLinha, lineNumber));
             lineNumber++;
 
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < numeroDeCasas; i++) {
                 grafo.addCasa(new Casa(i+1));
             }
 
-            for (int i = 1; i < n; i++) {
+            for (int i = 1; i < numeroDeCasas; i++) {
                 valores = scan.nextLine();
                 scanLinha = new Scanner(valores);
                 int k = i;
                 int ii;
-                int total = n-i;
+                int total = numeroDeCasas-i;
                 for (ii = 0; ii < total; ii++) {
                     int custo = validarValor(scanLinha, lineNumber);
                     Aresta novaAresta = new Aresta(grafo.getCasa(i-1), grafo.getCasa(k), custo);
