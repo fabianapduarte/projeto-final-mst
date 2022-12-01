@@ -1,6 +1,6 @@
 package arquivos.interfaces;
-import main.Dados;
+import estruturas.Grafo;
 
 public interface Leitura {
-    void lerDados(Dados dados);
+    void lerDados(Grafo dados);
 }

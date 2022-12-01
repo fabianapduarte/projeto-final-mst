@@ -1,10 +1,6 @@
 package estruturas;
 
-import java.util.Collection;
 import java.util.Comparator;
-        
-import java.util.Comparator;
-
 
 public class Aresta implements Comparable<Aresta>, Comparator<Aresta>{
     private Casa casaA;
@@ -19,7 +15,7 @@ public class Aresta implements Comparable<Aresta>, Comparator<Aresta>{
     
     @Override
     public String toString() {
-        return "\nAresta{" + "casaA=" + casaA.getChave() + ", casaB=" + casaB.getChave() + ", custo=" + custo + '}';
+        return "\nAresta{casaA=" + casaA.getChave() + ", casaB=" + casaB.getChave() + ", custo=" + custo + '}';
     }
 
     public Casa getCasaA() {

@@ -2,14 +2,14 @@
 
 ./src/estruturas/Casa.java
 ./src/estruturas/Aresta.java
+./src/estruturas/Grafo.java
 
 ./src/arquivos/interfaces/Escrita.java
 ./src/arquivos/interfaces/Leitura.java
 ./src/arquivos/IOFile.java
 
-./src/mst/Solucao.java
-./src/mst/SolucaoNaoOrdenada.java
-./src/mst/SolucaoOrdenada.java
+./src/arvoregeradora/Solucao.java
+./src/arvoregeradora/SolucaoNaoOrdenada.java
+./src/arvoregeradora/SolucaoOrdenada.java
 
-./src/main/Dados.java
 ./src/main/GeradorDeSolucao.java

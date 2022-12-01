@@ -1,7 +1,6 @@
 package arquivos;
 
 import arquivos.interfaces.*;
-import main.Dados;
 import estruturas.*;
 import main.GeradorDeSolucao;
 import java.io.File;
@@ -32,9 +31,9 @@ public class IOFile implements Leitura, Escrita{
         return num;
     }
     
-    // Leitura dos dados
+    // Leitura dos grafo
     // @Override 
-    public void lerDados(Dados dados){
+    public void lerDados(Grafo grafo){
         String caminhoRelativo = "../../../data/";
         File file = new File(this.caminhoAbsoluto + caminhoRelativo + fileIn + ".txt");
 
@@ -52,12 +51,12 @@ public class IOFile implements Leitura, Escrita{
             Scanner scanLinha = new Scanner(valores);
             
             int n = validarValor(scanLinha, lineNumber);
-            dados.setN(n);
-            dados.setD(validarValor(scanLinha, lineNumber));
+            grafo.setN(n);
+            grafo.setD(validarValor(scanLinha, lineNumber));
             lineNumber++;
 
             for (int i = 0; i < n; i++) {
-                dados.addCasa(new Casa(i+1));
+                grafo.addCasa(new Casa(i+1));
             }
 
             for (int i = 1; i < n; i++) {
@@ -68,13 +67,13 @@ public class IOFile implements Leitura, Escrita{
                 int total = n-i;
                 for (ii = 0; ii < total; ii++) {
                     int custo = validarValor(scanLinha, lineNumber);
-                    Aresta novaAresta = new Aresta(dados.getCasa(i-1), dados.getCasa(k), custo);
-                    dados.addAresta(novaAresta);
+                    Aresta novaAresta = new Aresta(grafo.getCasa(i-1), grafo.getCasa(k), custo);
+                    grafo.addAresta(novaAresta);
                     k++;
                 }
                 lineNumber++;
             }
-            System.out.println(dados.getArestas());
+            System.out.println(grafo.getArestas());
             
         } catch (NoSuchElementException e) {
             System.out.println("Erro na linha "+lineNumber);
@@ -102,7 +101,7 @@ public class IOFile implements Leitura, Escrita{
     
     public static String print(Casa cX, String fill, String saida, int nivel) {
         if (cX != null) {
-            saida = saida.concat(fill + cX.getChave()+'\n');
+            saida = saida.concat(fill +"c"+cX.getChave()+'\n');
             String espaco=espacador(fill, nivel);
             for (int i = 0; i < cX.getQtdFilhos(); i++) {
                 if (cX.getFilho(i)!= null) {

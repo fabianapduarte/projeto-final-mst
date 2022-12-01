@@ -1,11 +1,9 @@
-package main;
+package estruturas;
 
-import estruturas.Casa;
-import estruturas.Aresta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dados {
+public class Grafo {
     private int n;
     private int d;
     private List<Casa> casas = new ArrayList<>();
