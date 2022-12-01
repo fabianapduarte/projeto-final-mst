@@ -1,6 +1,8 @@
 package main;
 
 import arquivos.IOFile;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 
 /**
  *
@@ -8,6 +10,9 @@ import arquivos.IOFile;
  */
 public class GeradorDeSolucao {
     public static void main(String[] args) {
+        try {
+            System.setOut(new PrintStream(System.out, true, "UTF8"));
+        } catch (UnsupportedEncodingException ex) {}
         Dados dados = new Dados();
         IOFile io = new IOFile(args[0]);
         io.lerDados(dados);
