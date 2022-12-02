@@ -1,6 +1,6 @@
 package main;
 
-import estruturas.Grafo;
+import estruturas.*;
 import arvoregeradora.Solucao;
 import arvoregeradora.SolucaoOrdenada;
 import arvoregeradora.SolucaoNaoOrdenada;
@@ -20,19 +20,22 @@ public class GeradorDeSolucao {
         Grafo grafo = new Grafo();
         IOFile io = new IOFile(args[0]);
         io.lerDados(grafo);
-        
-        grafo.getCasa(0).setFilho(grafo.getCasa(1));
-        grafo.getCasa(0).setFilho(grafo.getCasa(2));
-            grafo.getCasa(2).setFilho(grafo.getCasa(3));
-                    grafo.getCasa(3).setFilho(grafo.getCasa(4));
                     
         Solucao solucao;
         if (args.length == 1 || args[1].equals("1")) {
             solucao = new SolucaoNaoOrdenada();
         } else {
             solucao = new SolucaoOrdenada();
+        }   
+        
+        Grafo mst = solucao.gerarSolucao(grafo);
+        Casa cX = mst.getAresta(0).getCasaA();
+        
+        for (int i = 0; i < mst.getArestas().size(); i++) {
+            Casa casaA = mst.getAresta(i).getCasaA();
+            Casa casaB = mst.getAresta(i).getCasaB();
+            casaA.setFilho(casaB);
         }
-        solucao.gerarArvores(grafo);
-        io.escreverSolucao(grafo.getCasa(0));
+        io.escreverSolucao(cX);
     }
 }

@@ -37,6 +37,10 @@ public class Grafo implements Comparable<Grafo>{
     public void addAresta(Aresta aresta){
         this.arestas.add(aresta);
     }
+    
+    public Aresta getAresta(int num){
+        return arestas.get(num);
+    }
 
     public List<Aresta> getArestas() {
         return arestas;
