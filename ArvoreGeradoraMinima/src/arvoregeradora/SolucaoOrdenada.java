@@ -1,6 +1,7 @@
 package arvoregeradora;
 
-import estruturas.Grafo;
+import estruturas.*;
+import java.util.List;
 
 public class SolucaoOrdenada extends Solucao{
 
@@ -18,7 +19,7 @@ public class SolucaoOrdenada extends Solucao{
     }
 
     @Override
-    protected Grafo gerarArvore(Grafo grafo, int limite, int num) {
+    protected Grafo gerarArvore(Grafo grafo, List<Aresta> arestas, int limite) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

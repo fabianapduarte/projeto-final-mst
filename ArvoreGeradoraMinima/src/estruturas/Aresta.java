@@ -18,12 +18,12 @@ public class Aresta implements Comparable<Aresta>, Comparator<Aresta>{
         return "\nAresta{casaA=" + casaA.getChave() + ", casaB=" + casaB.getChave() + ", custo=" + custo + '}';
     }
 
-    public Casa getCasaA() {
-        return casaA;
-    }
-
-    public Casa getCasaB() {
-        return casaB;
+    public Casa getCasa(String letra) {
+        if(letra.equals('a')){
+            return casaA;
+        }else{
+            return casaB;
+        }
     }
 
     public int getCusto() {
