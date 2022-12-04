@@ -10,6 +10,7 @@ import java.util.List;
 public class Casa {
     private int chave;
     private List<Casa> filhos = new ArrayList<>();
+    private Casa pai;
     private int altura;
 
     public Casa(int chave) {
@@ -42,5 +43,13 @@ public class Casa {
 
     public void setAltura(int altura) {
         this.altura = altura;
+    }
+
+    public Casa getPai() {
+        return pai;
+    }
+
+    public void setPai(Casa pai) {
+        this.pai = pai;
     }
 }
