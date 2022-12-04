@@ -1,7 +1,6 @@
 package arvoregeradora;
 
 import estruturas.*;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -69,7 +68,7 @@ public class SolucaoNaoOrdenada extends Solucao {
     @Override
     protected Grafo gerarArvore(Grafo grafo, List<Aresta> arestas, int limite) {
         //Baseado em kruskal
-        Grafo arvoreGeradora = new Grafo();
+//        Grafo arvoreGeradora = new Grafo();
         ConjuntoDisjunto conjunto = new ConjuntoDisjunto();
         int numeroDeCasas = grafo.getNumeroDeCasas();
         int numeroDeArestas = numeroDeCasas-1;
@@ -80,29 +79,34 @@ public class SolucaoNaoOrdenada extends Solucao {
         for (int i = 0; i < numeroDeCasas; ++i){ 
             Casa casa = grafo.getCasa(i);
             conjunto.gerar(casa);
-            //ele é seu proprio pai e o rank = 0        
+            //ele é seu proprio pai       
         }
  
         for (int i = 0; i < numeroDeArestas; i++) {
-            Aresta proximaAresta = grafo.getAresta(i++);
+            Aresta proximaAresta = grafo.getAresta(i);
+            System.out.println("aresta: "+proximaAresta);
  
             Casa casaA = conjunto.buscar(proximaAresta.getCasa("a"));
             Casa casaB = conjunto.buscar(proximaAresta.getCasa("b"));
 
-            if (casaA.getChave() != casaB.getChave()) {
-                arvoreGeradora.addAresta(proximaAresta);
-                conjunto.unir(casaA, casaB);
+            int conexoes = 0;
+            int chaveA = casaA.getChave();
+            int chaveB = casaB.getChave();
+            if (chaveA != chaveB) {
+//                arvoreGeradora.addAresta(proximaAresta);
+                conexoes = conjunto.unir(casaA, casaB);
             }
             
-            if(i == numeroDeArestas-1){
-                pilha.add(proximaAresta);
-            }
-            
-            if(!verificacao(arvoreGeradora, limite)){
-                return null;
-            }
+//            if(i == numeroDeArestas-1){
+//                pilha.add(proximaAresta);
+//            }
+//            
+//            if(!verificacao(conexoes, limite)){
+//                System.out.println("Nao atende aos criterios");
+//                return null;
+//            }
         }
-      
-        return arvoreGeradora;
+        
+        return grafo;
     }
 }

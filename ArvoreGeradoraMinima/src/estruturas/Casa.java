@@ -11,10 +11,11 @@ public class Casa {
     private int chave;
     private List<Casa> filhos = new ArrayList<>();
     private Casa pai;
-    private int altura;
+    private int conexoes;
 
     public Casa(int chave) {
         this.chave = chave;
+        this.conexoes = 0;
     }
 
     public int getChave() {
@@ -37,12 +38,12 @@ public class Casa {
         return this.filhos.size();
     }
 
-    public int getAltura() {
-        return altura;
+    public int getConexoes() {
+        return conexoes;
     }
 
-    public void setAltura(int altura) {
-        this.altura = altura;
+    public void setConexoes(int valor) {
+        this.conexoes = valor;
     }
 
     public Casa getPai() {

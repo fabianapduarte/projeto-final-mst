@@ -12,6 +12,7 @@ public class ConjuntoDisjunto {
 
     public void gerar(Casa elemento) {
         elemento.setPai(elemento);
+        elemento.setConexoes(0);
         elementos.add(elemento);
     }
 
@@ -30,7 +31,9 @@ public class ConjuntoDisjunto {
         return null;
     }
 
-    public void unir(Casa elemento1, Casa elemento2) {
+    public int unir(Casa elemento1, Casa elemento2) {
         elemento2.setPai(elemento1);
+        elemento1.setConexoes(elemento1.getConexoes()+1);
+        return elemento1.getConexoes();
     }
 }

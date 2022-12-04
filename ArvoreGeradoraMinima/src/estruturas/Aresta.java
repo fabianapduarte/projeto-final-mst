@@ -19,7 +19,7 @@ public class Aresta implements Comparable<Aresta>{
     }
 
     public Casa getCasa(String letra) {
-        if(letra.equals('a')){
+        if(letra.equals("a")){
             return casaA;
         }else{
             return casaB;
