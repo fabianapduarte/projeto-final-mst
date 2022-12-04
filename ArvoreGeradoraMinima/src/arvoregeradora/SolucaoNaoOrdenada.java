@@ -21,9 +21,9 @@ public class SolucaoNaoOrdenada extends Solucao {
         //Obtem arvore geradora com base no alg de kruskal
         Grafo arvoreGeradora = gerarArvore(grafoCompleto, arestas, limite); //ignora o ultimo parametro
 
-        if(arvoreGeradora != null){ //a mst encontrada é a primeira e obedece ao limite (não existe melhor que ela)
-            return arvoreGeradora;
-        }
+//        if(arvoreGeradora != null){ //a mst encontrada é a primeira e obedece ao limite (não existe melhor que ela)
+//            return arvoreGeradora;
+//        }
 
         int numeroDeCasas = grafoCompleto.getNumeroDeCasas();
         int totalDeArvores = (int) Math.pow(numeroDeCasas, numeroDeCasas-2);
@@ -81,30 +81,47 @@ public class SolucaoNaoOrdenada extends Solucao {
             conjunto.gerar(casa);
             //ele é seu proprio pai       
         }
- 
-        for (int i = 0; i < numeroDeArestas; i++) {
+        
+        int arestasAdd = 0;
+        System.out.println("\n\n########### ARVORE ###########");
+        int totalDeArestasDisponiveis = grafo.getArestas().size();
+        for (int i = 0; i < totalDeArestasDisponiveis; i++) {
+            
             Aresta proximaAresta = grafo.getAresta(i);
-            System.out.println("aresta: "+proximaAresta);
  
             Casa casaA = conjunto.buscar(proximaAresta.getCasa("a"));
             Casa casaB = conjunto.buscar(proximaAresta.getCasa("b"));
-
+                
             int conexoes = 0;
             int chaveA = casaA.getChave();
             int chaveB = casaB.getChave();
             if (chaveA != chaveB) {
 //                arvoreGeradora.addAresta(proximaAresta);
+                System.out.print(proximaAresta);
                 conexoes = conjunto.unir(casaA, casaB);
+                arestasAdd++;
             }
             
-//            if(i == numeroDeArestas-1){
-//                pilha.add(proximaAresta);
-//            }
-//            
-//            if(!verificacao(conexoes, limite)){
-//                System.out.println("Nao atende aos criterios");
-//                return null;
-//            }
+            if(i == numeroDeArestas-1){
+                pilha.add(proximaAresta);
+                // remover aresta do grafo
+                grafo.removeAresta(i);
+                totalDeArestasDisponiveis--;
+                i--;
+            }
+            
+            if(i == grafo.getArestas().size()-1 && arestasAdd<numeroDeArestas){
+                // ultima iteracao e nao temos o numero de arestas
+                // REFATORAR movendo pra dentro de verificacao
+                return null;
+            }
+            if(!true){
+                // Nao atende aos criterios
+                // System.out.println("Nao atende aos criterios");
+                return null;
+            }else if(arestasAdd == numeroDeArestas){
+                break;
+            } 
         }
         
         return grafo;
