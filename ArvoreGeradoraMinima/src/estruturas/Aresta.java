@@ -2,7 +2,7 @@ package estruturas;
 
 import java.util.Comparator;
 
-public class Aresta implements Comparable<Aresta>, Comparator<Aresta>{
+public class Aresta implements Comparable<Aresta>{
     private Casa casaA;
     private Casa casaB;
     private int custo;
@@ -11,7 +11,7 @@ public class Aresta implements Comparable<Aresta>, Comparator<Aresta>{
         this.casaA = casaA;
         this.casaB = casaB;
         this.custo = custo;
-    }
+    }   
     
     @Override
     public String toString() {
@@ -53,12 +53,7 @@ public class Aresta implements Comparable<Aresta>, Comparator<Aresta>{
     }
 
     @Override
-    public int compareTo(Aresta o) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public int compare(Aresta o1, Aresta o2) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public int compareTo(Aresta outra) {
+        return Integer.compare(this.custo, outra.custo);
     }
 }
