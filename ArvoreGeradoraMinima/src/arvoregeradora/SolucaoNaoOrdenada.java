@@ -70,7 +70,7 @@ public class SolucaoNaoOrdenada extends Solucao {
     protected Grafo gerarArvore(Grafo grafo, List<Aresta> arestas, int limite) {
         //Baseado em kruskal
         Grafo arvoreGeradora = new Grafo();
-//        List<ConjuntoDisjunto> casas = new ArrayList<>();
+        ConjuntoDisjunto conjunto = new ConjuntoDisjunto();
         int numeroDeCasas = grafo.getNumeroDeCasas();
         int numeroDeArestas = numeroDeCasas-1;
         
@@ -79,20 +79,20 @@ public class SolucaoNaoOrdenada extends Solucao {
 
         for (int i = 0; i < numeroDeCasas; ++i){ 
             Casa casa = grafo.getCasa(i);
-//            casas.add(new ConjuntoDisjunto(casa));
-            //no construtor ele é seu proprio pai e o rank = 0        
+            conjunto.gerar(casa);
+            //ele é seu proprio pai e o rank = 0        
         }
  
         for (int i = 0; i < numeroDeArestas; i++) {
             Aresta proximaAresta = grafo.getAresta(i++);
  
-//            Casa casaA = buscar(casas, proximaAresta.getCasa("a"));
-//            Casa casaB = buscar(casas, proximaAresta.getCasa("b"));
-// 
-//            if (casaA != casaB) {
-//                arvoreGeradora.addAresta(proximaAresta);
-//                unir(casas, casaA, casaB);
-//            }
+            Casa casaA = conjunto.buscar(proximaAresta.getCasa("a"));
+            Casa casaB = conjunto.buscar(proximaAresta.getCasa("b"));
+
+            if (casaA.getChave() != casaB.getChave()) {
+                arvoreGeradora.addAresta(proximaAresta);
+                conjunto.unir(casaA, casaB);
+            }
             
             if(i == numeroDeArestas-1){
                 pilha.add(proximaAresta);
