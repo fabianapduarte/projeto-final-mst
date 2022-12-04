@@ -82,7 +82,7 @@ public class IOFile implements Leitura, Escrita{
         }
     }
     
-    public static String espacador(String fill, int nivel){
+    private static String espacador(String fill, int nivel){
         String espaco="";
         if(nivel!=1){
             int ii=0;
@@ -99,7 +99,7 @@ public class IOFile implements Leitura, Escrita{
         return espaco;
     }
     
-    public static String print(Casa cX, String fill, String saida, int nivel) {
+    private static String print(Casa cX, String fill, String saida, int nivel) {
         if (cX != null) {
             saida = saida.concat(fill +"c"+cX.getChave()+'\n');
             String espaco=espacador(fill, nivel);
