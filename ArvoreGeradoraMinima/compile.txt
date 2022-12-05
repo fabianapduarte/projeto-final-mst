@@ -3,6 +3,7 @@
 ./src/estruturas/Casa.java
 ./src/estruturas/Aresta.java
 ./src/estruturas/Grafo.java
+./src/estruturas/ConjuntoDisjunto.java
 
 ./src/arquivos/interfaces/Escrita.java
 ./src/arquivos/interfaces/Leitura.java
