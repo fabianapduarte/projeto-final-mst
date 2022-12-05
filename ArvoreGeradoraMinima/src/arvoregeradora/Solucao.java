@@ -9,6 +9,8 @@ public abstract class Solucao {
     
     protected int nivel = 0;
     
+    protected int nivelAnterior = 0;
+    
     protected Stack<Aresta> pilha = new Stack<>();
     
     protected Grafo melhorOpcao = new Grafo();
