@@ -74,7 +74,10 @@ $ cd ArvoreGeradoraMinima
 $ javac @compile.txt
 
 # Execute o programa
-$ java @run.txt in
+# Substitua <modo> pelo modo de execução do algoritmo (se não indicado, o modo padrão é sem ordenação)
+# 1 - sem ordem de custo
+# 2 - com ordem de custo
+$ java @run.txt in <modo>
 
 ```
 
@@ -110,7 +113,10 @@ $ javac @compile.txt
 
 # Execute o programa com os arquivos de entrada
 # Substitua <in> pelo nome do arquivo
-$ java @run.txt <in>
+# Substitua <modo> pelo modo de execução do algoritmo (se não indicado, o modo padrão é sem ordenação)
+# 1 - sem ordem de custo
+# 2 - com ordem de custo
+$ java @run.txt <in> <modo>
 
 ```
 
