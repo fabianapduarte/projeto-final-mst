@@ -19,7 +19,7 @@ public class SolucaoOrdenada extends Solucao{
     }
 
     @Override
-    protected Grafo gerarArvore(Grafo grafo, List<Aresta> arestas, int limite) {
+    protected Grafo obterArvoreGeradora(Grafo grafo, List<Aresta> arestas) {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         return null;
     }

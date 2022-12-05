@@ -1,7 +1,5 @@
 package estruturas;
 
-import java.util.Comparator;
-
 public class Aresta implements Comparable<Aresta>{
     private Casa casaA;
     private Casa casaB;

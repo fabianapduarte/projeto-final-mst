@@ -15,5 +15,5 @@ public abstract class Solucao {
     
     protected abstract boolean verificarLimite(Grafo grafo, int limite);
     
-    protected abstract Grafo gerarArvore(Grafo grafo, List<Aresta> arestas, int limite);
+    protected abstract Grafo obterArvoreGeradora(Grafo grafo, List<Aresta> arestas);
 }

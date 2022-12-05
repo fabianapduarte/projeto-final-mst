@@ -33,7 +33,7 @@ public class ConjuntoDisjunto {
 
     public int unir(Casa elemento1, Casa elemento2) {
         elemento2.setPai(elemento1);
-        elemento1.setConexoes(elemento1.getConexoes()+1);
+        elemento1.setConexoes(elemento1.getConexoes() + elemento2.getConexoes() + 1);
         return elemento1.getConexoes();
     }
 }
