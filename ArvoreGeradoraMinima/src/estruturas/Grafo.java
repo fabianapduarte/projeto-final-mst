@@ -10,6 +10,20 @@ public class Grafo implements Comparable<Grafo>{
     private List<Casa> casas = new ArrayList<>();
     private List<Aresta> arestas = new ArrayList<>();
 
+    public Grafo() {
+        this.numeroDeCasas = 0;
+        this.limiteDeConexoes = 0;
+        this.custoTotal = 0;
+    }
+
+    public Grafo(Grafo arvore) {
+        this.numeroDeCasas = arvore.numeroDeCasas;
+        this.limiteDeConexoes = arvore.limiteDeConexoes;
+        this.custoTotal = arvore.custoTotal;
+        this.casas = arvore.casas;
+        this.arestas = arvore.arestas;
+    }
+
     public int getNumeroDeCasas() {
         return numeroDeCasas;
     }

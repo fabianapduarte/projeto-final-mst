@@ -30,7 +30,7 @@ public class SolucaoNaoOrdenada extends Solucao {
             arvoreGeradora = obterArvoreGeradora(grafoCompleto, arestas);      
             if (arvoreGeradora != null) { // É nula quando nao atende aos criterios (D ou custo)
                 // temos a primeira candidata (primeira arvore q respeita D) - nas proximas iteracoes substitui pela de menor custo
-                melhorOpcao = arvoreGeradora;
+                melhorOpcao = new Grafo(arvoreGeradora);
             }
         }
 
