@@ -12,14 +12,22 @@
 
 ## 💻 Sobre o projeto
 
-Trabalho desenvolvido para as disciplinas de Estruturas de Dados Básicas II e Linguagem de Programação II, cujo objetivo é implementar uma árvore geradora mínima para resolver um problema NP-difícil em Java.
-Clique [aqui](https://docs.google.com/document/d/17_2G-u_DUoTQZEkwlLO0KR2zLgqyOgJS/edit?usp=sharing&ouid=116738805822748469008&rtpof=true&sd=true) para acessar o documento com o relatório do trabalho.
+Trabalho desenvolvido para as disciplinas de Estruturas de Dados Básicas II e Linguagem de Programação II, cujo objetivo é implementar uma solução para um problema NP-difícil de obtenção de uma árvore geradora mínima em Java com base no algoritmo de Kruskal.
+
+### Links extras
+
+- [Relatório do trabalho](https://docs.google.com/document/d/17_2G-u_DUoTQZEkwlLO0KR2zLgqyOgJS/edit?usp=sharing&ouid=116738805822748469008&rtpof=true&sd=true)
+- [Slides de apresentação](https://docs.google.com/presentation/d/1DIv3HYaDD9ErowkvRs-FbzNh_wUaePxY_Hu-Ofm9vts/edit?usp=sharing)
 
 ---
 
 ## ⚙ Funcionalidades
 
-...
+- [x] Leitura do arquivo de entrada
+- [ ] Gerar árvores geradoras
+  - [ ] Sem ordem de custo
+  - [ ] Com ordem de custo
+- [ ] Salvar no arquivo a melhor solução encontrada 
 
 ---
 
@@ -35,13 +43,13 @@ Clique [aqui](https://docs.google.com/document/d/17_2G-u_DUoTQZEkwlLO0KR2zLgqyOg
 
 ### Instalação
 
-Para executar o programa, é necessário ter o JDK do Java instalado na máquina. Para instalar no Linux, execute no terminal
+Para executar o programa, é necessário ter o JDK do Java instalado na máquina. Para instalar no Linux, execute no terminal:
 
 ```bash
 $ sudo apt install default-jdk
 ```
 
-Após a instalação, clone este repositório
+Após a instalação, clone este repositório:
 
 ```bash
 
@@ -57,18 +65,18 @@ $ cd projeto-final-mst
 
 ### Rodando o projeto com os arquivos presentes em `/data`
 
-<!-- ```bash
+```bash
 
-# Acesse a pasta ArvoreBinariaBusca do projeto no terminal/cmd
-$ cd ArvoreBinariaBusca
+# Acesse a pasta ArvoreGeradoraMinima do projeto no terminal/cmd
+$ cd ArvoreGeradoraMinima
 
 # Compile o código
 $ javac @compile.txt
 
 # Execute o programa
-$ java @run.txt abb comandos
+$ java @run.txt in
 
-``` -->
+```
 
 <br />
 
@@ -76,26 +84,39 @@ $ java @run.txt abb comandos
 
 **⚠ Observações:**
 
-- Adicione as novas bases de dados em formato `.txt` na pasta `/entrada`;
-- ...
+- Adicione as novas bases de dados em formato `.txt` na pasta `/data`;
+- As bases de dados devem seguir o seguinte formato:
 
-<!-- ```bash
-# Acesse a pasta ArvoreBinariaBusca do projeto no terminal/cmd
-$ cd ArvoreBinariaBusca
+```
+
+<valor de n> <valor de d>
+<custo c1---c2> <custo c1---c3> <custo c1---c4> ... <custo c1---cn>
+<custo c2---c3> <custo c2---c4> ... <custo c2---cn>
+<custo c3---c4> ... <custo c3---cn>
+...
+<custo c(n-1)---cn>
+
+```
+
+Para executar no terminal:
+
+```bash
+
+# Acesse a pasta ArvoreGeradoraMinima do projeto no terminal/cmd
+$ cd ArvoreGeradoraMinima
 
 # Compile o código
 $ javac @compile.txt
 
 # Execute o programa com os arquivos de entrada
-# Substitua <abb> pelo nome do arquivo com os elementos da árvore
-# Substitua <comandos> pelo nome do arquivo que conterá os comandos a serem executados
-$ java @run.txt <abb> <comandos>
+# Substitua <in> pelo nome do arquivo
+$ java @run.txt <in>
 
-``` -->
+```
 
 ---
 
 ## 👥 Autores
 
-- Fabiana Pereira
-- Samuel Costa
+- Fabiana Pereira, aluna de Estruturas de Dados Básicas II
+- Samuel Costa, aluno de Estruturas de Dados Básicas II e Linguagem de Programação II
