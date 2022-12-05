@@ -46,7 +46,7 @@ public class SolucaoNaoOrdenada extends Solucao {
     private boolean validarArvoreGeradora(Grafo arvoreGeradora, int conexoes) {
         boolean validacao = true;
 
-        boolean obedeceLimite = verificarLimite(arvoreGeradora, conexoes); 
+        boolean obedeceLimite = verificarLimite(arvoreGeradora, conexoes);
         if (!obedeceLimite) {
             validacao = false;
         } else if (melhorOpcao != null) {
@@ -81,18 +81,18 @@ public class SolucaoNaoOrdenada extends Solucao {
         for (int i = 0; i < totalDeArestasDisponiveis; i++) {
             Aresta proximaAresta = grafo.getAresta(i);
  
-            Casa raizCasaA = conjunto.buscar(proximaAresta.getCasa("a"));
-            Casa raizCasaB = conjunto.buscar(proximaAresta.getCasa("b"));
+            Casa casaA = proximaAresta.getCasa("a");
+            Casa casaB = proximaAresta.getCasa("b");
                 
             int conexoes = 0;
-            int chaveRaizA = raizCasaA.getChave();
-            int chaveRaizB = raizCasaB.getChave();
+            int chaveRaizA = conjunto.buscar(casaA).getChave();
+            int chaveRaizB = conjunto.buscar(casaB).getChave();
 
             // Verifica se forma ciclos e, se não houver, une as casas
             if (chaveRaizA != chaveRaizB && proximaAresta.getNivel() == 0) {
                 arestasAdd.add(proximaAresta);
-//                System.out.print(proximaAresta);
-                conexoes = conjunto.unir(raizCasaA, raizCasaB);
+                System.out.print(proximaAresta);
+                conexoes = conjunto.unir(casaA, casaB);
                 grafo.setCustoTotal(grafo.getCustoTotal() + proximaAresta.getCusto());
                 numeroArestasAdicionadas++;
             }else if(chaveRaizA == chaveRaizB){

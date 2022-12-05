@@ -32,9 +32,20 @@ public class ConjuntoDisjunto {
     }
 
     public int unir(Casa elemento1, Casa elemento2) {
-        elemento2.setPai(elemento1);
-        int conexoesElemento1 = elemento1.getConexoes() != 0 ? elemento1.getConexoes() : 1;
-        elemento1.setConexoes(conexoesElemento1 + elemento2.getConexoes());
-        return elemento1.getConexoes();
+        int conexoes1 = elemento1.getConexoes();
+        int conexoes2 = elemento2.getConexoes();
+
+        elemento1.setPai(elemento2);
+
+        conexoes1++;
+        elemento1.setConexoes(conexoes1);
+        conexoes2++;
+        elemento2.setConexoes(conexoes2);
+
+        if (conexoes1 >= conexoes2) {
+            return conexoes1;
+        } else {
+            return conexoes2;
+        }
     }
 }
