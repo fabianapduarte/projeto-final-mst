@@ -7,6 +7,8 @@ import java.util.Stack;
 public abstract class Solucao {
     protected static final int max = Integer.MAX_VALUE;
     
+    protected int nivel = 2;
+    
     protected Stack<Aresta> pilha = new Stack<>();
     
     protected Grafo melhorOpcao = new Grafo();

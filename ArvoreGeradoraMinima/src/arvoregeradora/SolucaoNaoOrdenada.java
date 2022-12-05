@@ -1,6 +1,7 @@
 package arvoregeradora;
 
 import estruturas.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -49,8 +50,7 @@ public class SolucaoNaoOrdenada extends Solucao {
         if (!obedeceLimite) {
             validacao = false;
         } else if (melhorOpcao != null) {
-            int comparacao = arvoreGeradora.compareTo(melhorOpcao);
-            if (comparacao != menor) {
+            if (arvoreGeradora.getCustoTotal() > melhorOpcao.getCustoTotal()) {
                 validacao = false;
             }
         }
@@ -61,6 +61,7 @@ public class SolucaoNaoOrdenada extends Solucao {
     @Override
     // Obtem a árvore geradora a partir do algoritmo de Kruskal
     protected Grafo obterArvoreGeradora(Grafo grafo, List<Aresta> arestas) {
+        List<Aresta> arestasAdd = new ArrayList<>();
         ConjuntoDisjunto conjunto = new ConjuntoDisjunto();
         int numeroDeCasas = grafo.getNumeroDeCasas();
         int numeroDeArestas = numeroDeCasas-1;
@@ -76,6 +77,7 @@ public class SolucaoNaoOrdenada extends Solucao {
         
         int numeroArestasAdicionadas = 0;
         int totalDeArestasDisponiveis = grafo.getTotalArestas();
+        grafo.setCustoTotal(0);
         System.out.println("\n\n########### ARVORE ###########");
         for (int i = 0; i < totalDeArestasDisponiveis; i++) {
             Aresta proximaAresta = grafo.getAresta(i);
@@ -88,25 +90,37 @@ public class SolucaoNaoOrdenada extends Solucao {
             int chaveRaizB = raizCasaB.getChave();
 
             // Verifica se forma ciclos e, se não houver, une as casas
-            if (chaveRaizA != chaveRaizB) {
+            if (chaveRaizA != chaveRaizB && proximaAresta.isValida()) {
+                arestasAdd.add(proximaAresta);
                 System.out.print(proximaAresta);
                 conexoes = conjunto.unir(raizCasaA, raizCasaB);
                 grafo.setCustoTotal(grafo.getCustoTotal() + proximaAresta.getCusto());
                 numeroArestasAdicionadas++;
             }
             
-            // Remove penúltima aresta
-            if (i == numeroDeArestas - 1) {
-                pilha.add(proximaAresta);
-                grafo.removerAresta(i);
-                grafo.setCustoTotal(grafo.getCustoTotal() - proximaAresta.getCusto());
-                totalDeArestasDisponiveis--;
-                i--;
+            if (numeroArestasAdicionadas == numeroDeArestas) {
+                if (proximaAresta.isValida()) {
+                    proximaAresta.setValida();
+                }
+            }
+            
+            if (i == grafo.getTotalArestas() - 1){
+                for (int j = 0; j < grafo.getTotalArestas(); j++) {
+                    if (!arestas.get(j).isValida()){
+                        arestas.get(j).setValida();
+                    }
+                }
+                
+                Aresta novaInvalida = arestasAdd.get(arestasAdd.size()-nivel);
+                nivel++;
+//                System.out.println("\nnova "+ novaEmpilhada);
+                novaInvalida.setValida();
+                return null;
             }
 
             // Valida custo e quantidade de conexões da árvore/floresta gerada
             boolean isArvoreValida = validarArvoreGeradora(grafo, conexoes);
-            if (!isArvoreValida || (i == grafo.getTotalArestas() - 1 && numeroArestasAdicionadas < numeroDeArestas)) {
+            if (!isArvoreValida) {
                 System.out.println("\nNão atende aos critérios.");
                 return null;
             }

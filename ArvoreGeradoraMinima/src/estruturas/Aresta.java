@@ -4,12 +4,22 @@ public class Aresta implements Comparable<Aresta>{
     private Casa casaA;
     private Casa casaB;
     private int custo;
+    private boolean valida;
 
     public Aresta(Casa casaA, Casa casaB, int custo) {
         this.casaA = casaA;
         this.casaB = casaB;
         this.custo = custo;
+        this.valida = true;
     }   
+    
+    public boolean isValida() {
+        return valida;
+    }
+
+    public void setValida() {
+        this.valida = !this.valida;
+    }
     
     @Override
     public String toString() {
