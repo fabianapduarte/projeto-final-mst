@@ -1,6 +1,7 @@
 package arvoregeradora;
 
 import estruturas.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -68,7 +69,7 @@ public class SolucaoNaoOrdenada extends Solucao {
     @Override
     protected Grafo gerarArvore(Grafo grafo, List<Aresta> arestas, int limite) {
         //Baseado em kruskal
-//        Grafo arvoreGeradora = new Grafo();
+        List<Aresta> arestasAdd = new ArrayList<>();
         ConjuntoDisjunto conjunto = new ConjuntoDisjunto();
         int numeroDeCasas = grafo.getNumeroDeCasas();
         int numeroDeArestas = numeroDeCasas-1;
@@ -82,7 +83,7 @@ public class SolucaoNaoOrdenada extends Solucao {
             //ele é seu proprio pai       
         }
         
-        int arestasAdd = 0;
+        int numerosArestasAdicinadas = 0;
         System.out.println("\n\n########### ARVORE ###########");
         int totalDeArestasDisponiveis = grafo.getArestas().size();
         for (int i = 0; i < totalDeArestasDisponiveis; i++) {
@@ -95,31 +96,37 @@ public class SolucaoNaoOrdenada extends Solucao {
             int conexoes = 0;
             int chaveA = casaA.getChave();
             int chaveB = casaB.getChave();
-            if (chaveA != chaveB) {
-//                arvoreGeradora.addAresta(proximaAresta);
-                System.out.print(proximaAresta);
+            if (chaveA != chaveB && proximaAresta.isValida()) {
+                arestasAdd.add(proximaAresta);
                 conexoes = conjunto.unir(casaA, casaB);
-                arestasAdd++;
+                System.out.print(proximaAresta);
+                numerosArestasAdicinadas++;
             }
             
-            if(i == numeroDeArestas-1){
-                pilha.add(proximaAresta);
-                // remover aresta do grafo
-                grafo.removeAresta(i);
-                totalDeArestasDisponiveis--;
-                i--;
+            if(numerosArestasAdicinadas == numeroDeArestas){
+                if(proximaAresta.isValida()){
+                    proximaAresta.setValida();
+                }
             }
             
-            if(i == grafo.getArestas().size()-1 && arestasAdd<numeroDeArestas){
-                // ultima iteracao e nao temos o numero de arestas
-                // REFATORAR movendo pra dentro de verificacao
+            if(i == grafo.getArestas().size()-1){
+                for (int j = 0; j < grafo.getArestas().size(); j++) {
+                    if(!arestas.get(j).isValida()){
+                        arestas.get(j).setValida();
+                    }
+                }
+                
+                Aresta novaInvalida = arestasAdd.get(arestasAdd.size()-nivel);
+                nivel++;
+//                System.out.println("\nnova "+ novaEmpilhada);
+                novaInvalida.setValida();
                 return null;
             }
             if(!true){
                 // Nao atende aos criterios
                 // System.out.println("Nao atende aos criterios");
                 return null;
-            }else if(arestasAdd == numeroDeArestas){
+            }else if(numerosArestasAdicinadas == numeroDeArestas){
                 break;
             } 
         }
