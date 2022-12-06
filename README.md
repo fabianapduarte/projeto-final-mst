@@ -5,7 +5,6 @@
 <p align="center">
  <a href="#-sobre-o-projeto">Sobre</a> •
  <a href="#-funcionalidades">Funcionalidades</a> •
- <a href="#-exemplo">Exemplo</a> • 
  <a href="#-como-executar-o-projeto">Como executar</a> •
  <a href="#-autores">Autores</a>
 </p>
@@ -25,21 +24,15 @@ Trabalho desenvolvido para as disciplinas de Estruturas de Dados Básicas II e L
 
 - [x] Leitura do arquivo de entrada
 - [ ] Gerar árvores geradoras
-  - [ ] Sem ordem de custo
+  - [x] Sem ordem de custo
   - [ ] Com ordem de custo
-- [ ] Salvar no arquivo a melhor solução encontrada 
-
----
-
-## 📑 Exemplo
-
-<!-- <p align="center">
-  <img src="./.github/terminal.png" alt="Terminal" width="800px" style="margin: 16px 0" />
-</p> -->
+- [x] Salvar no arquivo a melhor solução encontrada 
 
 ---
 
 ## 🚀 Como executar o projeto
+
+**⚠ Atenção:** Ao executar o código, a saída gerada é salva no arquivo `out/solucao.txt`.
 
 ### Instalação
 
@@ -74,10 +67,7 @@ $ cd ArvoreGeradoraMinima
 $ javac @compile.txt
 
 # Execute o programa
-# Substitua <modo> pelo modo de execução do algoritmo (se não indicado, o modo padrão é sem ordenação)
-# 1 - sem ordem de custo
-# 2 - com ordem de custo
-$ java @run.txt in <modo>
+$ java @run.txt in
 
 ```
 
@@ -113,10 +103,7 @@ $ javac @compile.txt
 
 # Execute o programa com os arquivos de entrada
 # Substitua <in> pelo nome do arquivo
-# Substitua <modo> pelo modo de execução do algoritmo (se não indicado, o modo padrão é sem ordenação)
-# 1 - sem ordem de custo
-# 2 - com ordem de custo
-$ java @run.txt <in> <modo>
+$ java @run.txt <in>
 
 ```
 

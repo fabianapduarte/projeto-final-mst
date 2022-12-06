@@ -73,7 +73,6 @@ public class IOFile implements Leitura, Escrita{
                 }
                 lineNumber++;
             }
-            System.out.println(grafo.getArestas());
             
         } catch (NoSuchElementException e) {
             System.out.println("Erro na linha "+lineNumber);
@@ -97,7 +96,7 @@ public class IOFile implements Leitura, Escrita{
                 escrever.write(saida);
             }
             saida = "Custo total: "+grafo.getCustoTotal();
-            System.out.print(saida);
+            System.out.println(saida);
             escrever.write(saida);
             escrever.close();
         } catch (IOException e) {
