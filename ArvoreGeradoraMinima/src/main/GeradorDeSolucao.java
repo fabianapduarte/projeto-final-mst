@@ -29,8 +29,7 @@ public class GeradorDeSolucao {
         }   
         
         Grafo mst = solucao.gerarSolucao(grafo);
-        Casa cX = mst.inverterRelacao(mst.getCasas());
         
-        io.escreverSolucao(cX);
+        io.escreverSolucao(mst);
     }
 }

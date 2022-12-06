@@ -88,19 +88,4 @@ public class Grafo implements Comparable<Grafo>{
     public int compareTo(Grafo grafoComparado) {
         return Integer.compare(this.custoTotal, grafoComparado.custoTotal);
     }
-    
-    public Casa inverterRelacao(List<Casa> lista){
-        Casa cX = null;
-        for (int i = 0; i < lista.size(); i++) {
-            Casa casa = lista.get(i);
-            Casa pai = lista.get(i).getPai();
-//            System.out.println("Pai: "+pai.getChave()+" - Filho: "+casa.getChave());
-            if(pai == casa){
-                cX = casa;
-            }else{
-                pai.setFilho(casa);
-            }
-        }
-        return cX;
-    }
 }

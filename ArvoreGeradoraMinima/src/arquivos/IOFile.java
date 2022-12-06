@@ -82,54 +82,22 @@ public class IOFile implements Leitura, Escrita{
         }
     }
     
-    private static String espacador(String fill, int nivel){
-        String espaco="";
-        if(nivel!=1){
-            int ii=0;
-            for (int j = 0; j < nivel-1; j++){
-                String espacador="   ";
-                Character c = fill.charAt(ii);
-                if(c.equals('├') || c.equals('|')){
-                    espacador = "|  ";
-                }
-                ii+=3;
-                espaco = espaco.concat(espacador);
-            }
-        }
-        return espaco;
-    }
-    
-    private static String print(Casa cX, String fill, String saida, int nivel) {
-        if (cX != null) {
-            saida = saida.concat(fill +"c"+cX.getChave()+'\n');
-            String espaco=espacador(fill, nivel);
-            for (int i = 0; i < cX.getQtdFilhos(); i++) {
-                if (cX.getFilho(i)!= null) {
-                    String simbolo = "├──";
-                    if (i==cX.getQtdFilhos()-1) {
-                        simbolo = "└──";
-                    }
-                    
-                    fill = espaco+simbolo;
-                    saida = saida.concat(print(cX.getFilho(i), fill, "", nivel+1));
-                }
-            }
-        }
-        return saida;
-    }
-    
     // Escrita da solucao
     // @Override
-    public void escreverSolucao(Casa cX){
+    public void escreverSolucao(Grafo grafo){
         String caminhoRelativoSaida = "../../../out/solucao.txt";
         String caminhoSaida = this.caminhoAbsoluto + caminhoRelativoSaida;
         
         try {
+            String saida;
             FileWriter escrever = new FileWriter(caminhoSaida);
-            String saida = "";
-            String fill = "";
-            saida = print(cX, fill, saida, 1);
-            System.out.println(saida);
+            for (int i = 0; i < grafo.getArestas().size(); i++) {
+                saida = "[c"+grafo.getAresta(i).getCasa("a").getChave()+", c"+grafo.getAresta(i).getCasa("b").getChave()+"] - "+grafo.getAresta(i).getCusto()+"\n";
+                System.out.print(saida);
+                escrever.write(saida);
+            }
+            saida = "Custo total: "+grafo.getCustoTotal();
+            System.out.print(saida);
             escrever.write(saida);
             escrever.close();
         } catch (IOException e) {

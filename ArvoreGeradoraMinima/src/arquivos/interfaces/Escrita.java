@@ -1,6 +1,6 @@
 package arquivos.interfaces;
-import estruturas.Casa;
+import estruturas.Grafo;
 
 public interface Escrita {
-    void escreverSolucao(Casa cX);
+    void escreverSolucao(Grafo g);
 }
