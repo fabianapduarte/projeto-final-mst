@@ -1,10 +1,7 @@
 package estruturas;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Classe para o nó da árvore
+ * Classe para a casa/vértice
  * @author Fabiana Pereira e Samuel Costa
  */
 public class Casa {

@@ -8,7 +8,6 @@ public class SolucaoOrdenada extends Solucao{
     @Override
     public Grafo gerarSolucao(Grafo grafo) {
         System.out.println("Gerando árvores de forma ordenada...");
-//        throw new UnsupportedOperationException("Not supported yet.");
         return null;
     }
 
@@ -20,7 +19,6 @@ public class SolucaoOrdenada extends Solucao{
 
     @Override
     protected Grafo obterArvoreGeradora(Grafo grafo, List<Aresta> arestas) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         return null;
     }
 }

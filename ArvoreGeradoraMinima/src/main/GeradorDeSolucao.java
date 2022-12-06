@@ -5,8 +5,6 @@ import arvoregeradora.Solucao;
 import arvoregeradora.SolucaoOrdenada;
 import arvoregeradora.SolucaoNaoOrdenada;
 import arquivos.IOFile;
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
 
 /**
  *
@@ -14,9 +12,6 @@ import java.io.UnsupportedEncodingException;
  */
 public class GeradorDeSolucao {
     public static void main(String[] args) {
-//        try {
-//            System.setOut(new PrintStream(System.out, true, "UTF8"));
-//        } catch (UnsupportedEncodingException ex) {}
         Grafo grafo = new Grafo();
         IOFile io = new IOFile(args[0]);
         io.lerDados(grafo);

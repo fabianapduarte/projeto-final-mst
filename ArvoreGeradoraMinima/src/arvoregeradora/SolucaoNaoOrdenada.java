@@ -9,6 +9,7 @@ import java.util.Stack;
 public class SolucaoNaoOrdenada extends Solucao {
     private static final int menor = -1;
     private boolean invalida = false;
+
     public SolucaoNaoOrdenada() {
         melhorOpcao = null;
     }
@@ -24,7 +25,7 @@ public class SolucaoNaoOrdenada extends Solucao {
         int totalDeArvores = (int) Math.pow(numeroDeCasas, numeroDeCasas-2);
         nivel = numeroDeCasas-1;
         int i = 0;
-        while ( i < totalDeArvores || invalida==true) {
+        while (i < totalDeArvores || invalida == true) {
             if(invalida){
                 invalida = false;
                 i--;
@@ -32,7 +33,7 @@ public class SolucaoNaoOrdenada extends Solucao {
             System.out.println("\n\n########### ARVORE "+(i+1)+" ##########");
             arvoreGeradora = obterArvoreGeradora(grafoCompleto, arestas);      
             if (arvoreGeradora != null) { // É nula quando nao atende aos criterios (D ou custo)
-                // temos a primeira candidata (primeira arvore q respeita D) - nas proximas iteracoes substitui pela de menor custo
+                // primeira candidata (primeira arvore q respeita D) - nas proximas iteracoes substitui pela de menor custo
                 melhorOpcao = new Grafo(arvoreGeradora);
             }
             i++;
@@ -55,7 +56,7 @@ public class SolucaoNaoOrdenada extends Solucao {
         if (!obedeceLimite) {
             validacao = false;
         } else if (melhorOpcao != null) {
-            if (arvoreGeradora.getCustoTotal() > melhorOpcao.getCustoTotal()) {
+            if (melhorOpcao.compareTo(arvoreGeradora) != menor) {
                 validacao = false;
             }
         }
@@ -136,7 +137,7 @@ public class SolucaoNaoOrdenada extends Solucao {
                         ultimoNivel++;
                 }
                 
-                 //             Valida custo e quantidade de conexões da árvore/floresta gerada
+                // Valida custo e quantidade de conexões da árvore/floresta gerada
                 boolean isArvoreValida = validarArvoreGeradora(grafo, conexoes); 
                 if (!isArvoreValida) {
                     System.out.println("\nNão atende aos critérios.");
