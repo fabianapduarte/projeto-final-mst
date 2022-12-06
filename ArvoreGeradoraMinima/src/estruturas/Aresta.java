@@ -23,7 +23,7 @@ public class Aresta implements Comparable<Aresta>{
     
     @Override
     public String toString() {
-        return "\nAresta{casaA=" + casaA.getChave() + ", casaB=" + casaB.getChave() + ", custo=" + custo + '}';
+        return "\nAresta{casaA=" + casaA.getChave() + ", casaB=" + casaB.getChave() + ", custo=" + custo + ", nivel=" + nivel +'}';
     }
 
     public Casa getCasa(String letra) {
@@ -43,21 +43,6 @@ public class Aresta implements Comparable<Aresta>{
         int hash = 7;
         hash = 83 * hash + this.custo;
         return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Aresta other = (Aresta) obj;
-        return this.custo == other.custo;
     }
 
     @Override
