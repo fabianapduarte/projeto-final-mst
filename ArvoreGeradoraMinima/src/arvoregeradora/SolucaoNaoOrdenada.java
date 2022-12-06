@@ -4,6 +4,7 @@ import estruturas.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 
 public class SolucaoNaoOrdenada extends Solucao {
     private static final int menor = -1;
@@ -37,6 +38,7 @@ public class SolucaoNaoOrdenada extends Solucao {
             i++;
         }
 
+        System.out.println(melhorOpcao.getArestas());
         return melhorOpcao;
     }
 
@@ -68,6 +70,13 @@ public class SolucaoNaoOrdenada extends Solucao {
         ConjuntoDisjunto conjunto = new ConjuntoDisjunto();
         int numeroDeCasas = grafo.getNumeroDeCasas();
         int numeroDeArestas = numeroDeCasas-1;
+        int numeroArestasAdicionadas = 0;
+        int totalDeArestasDisponiveis = grafo.getTotalArestas();
+        int validas = 0;
+        int deMesmoNivel = 0;
+        int ultimoNivel = 0;
+        Grafo retorno = null;
+        Stack<Aresta> pilha = new Stack<>();
         Collections.sort(arestas);
 
         // Cria conjuntos disjuntos unitários para cada casa
@@ -76,8 +85,6 @@ public class SolucaoNaoOrdenada extends Solucao {
             conjunto.gerar(casa);
         }
              
-        int numeroArestasAdicionadas = 0;
-        int totalDeArestasDisponiveis = grafo.getTotalArestas();
         grafo.setCustoTotal(0);
         for (int i = 0; i < totalDeArestasDisponiveis; i++) {
             Aresta proximaAresta = grafo.getAresta(i);
@@ -91,107 +98,90 @@ public class SolucaoNaoOrdenada extends Solucao {
 
             // Verifica se forma ciclos e, se não houver, une as casas
             if (chaveRaizA != chaveRaizB && proximaAresta.getNivel() == 0) {
+//                System.out.print(proximaAresta);
                 arestasAdd.add(proximaAresta);
-                System.out.print(proximaAresta);
                 conexoes = conjunto.unir(casaA, casaB);
                 grafo.setCustoTotal(grafo.getCustoTotal() + proximaAresta.getCusto());
                 numeroArestasAdicionadas++;
-                if (numeroArestasAdicionadas == numeroDeArestas) {
-                    proximaAresta.setNivel(numeroDeArestas);
-                }
+//                if (numeroArestasAdicionadas == numeroDeArestas) {
+//                    proximaAresta.setNivel(numeroDeArestas);
+//                }
+                pilha.add(proximaAresta);
             }else if(chaveRaizA == chaveRaizB){
                 proximaAresta.setNivel(-1);
             }
             
-            
-            
-            int validas = 0;
-            int doNivel = 0;
-            int ultimoNivel = 0;
-            for (int j = 0; j < totalDeArestasDisponiveis; j++) {
-                if (grafo.getAresta(j).getNivel()==0) {
-                    validas++;
-                }
-                if (grafo.getAresta(j).getNivel()==nivel) {
-                    doNivel++;
-                }
-                if (grafo.getAresta(j).getNivel()==numeroDeArestas) {
-                    ultimoNivel++;
-                }
-            }
+            nivel = pilha.size();
+//            System.out.println(nivel);
             
             
             if(numeroArestasAdicionadas == numeroDeArestas){
-                System.out.println("Nivel: "+nivel);
+               
+                //Desempilha e controla nivel das arestas
+                Aresta ultimoAdd = pilha.pop();
+                int index = arestas.indexOf(ultimoAdd);
+                arestas.get(index).setNivel(nivel);
+                
+//                 Exibir
+//                System.out.println(arestas);
+//                System.out.println();
                 System.out.println(arestasAdd);
+                
                 for (int j = 0; j < totalDeArestasDisponiveis; j++) {
-                    System.out.println(grafo.getAresta(j).getNivel());
+                    if (arestas.get(j).getNivel()==0)
+                        validas++;
+                    if (arestas.get(j).getNivel()==nivel)
+                        deMesmoNivel++;
+                    if (arestas.get(j).getNivel()==numeroDeArestas)
+                        ultimoNivel++;
                 }
                 
+                 //             Valida custo e quantidade de conexões da árvore/floresta gerada
+                boolean isArvoreValida = validarArvoreGeradora(grafo, conexoes); 
+                if (!isArvoreValida) {
+                    System.out.println("\nNão atende aos critérios.");
+                    return null;
+                }else{
+                    retorno = new Grafo();
+                    retorno.addArestas(arestasAdd);
+                    retorno.setCustoTotal(grafo.getCustoTotal());
+                    retorno.setLimiteDeConexoes(grafo.getLimiteDeConexoes());
+                }
                 
-                System.out.println("\nValidas "+validas);
-                if (doNivel == numeroDeArestas || ultimoNivel+validas==numeroDeArestas) {
-                    nivel--;
-                    nivelAnterior = nivel;
-                    
-                    System.out.println("mudou de nivel para - "+nivel);
+                if (deMesmoNivel == numeroDeArestas || validas<numeroDeArestas) {
                     for (int j = 0; j < totalDeArestasDisponiveis; j++) {
-                        if(grafo.getAresta(j).getNivel()>nivel || grafo.getAresta(j).getNivel()==-1){
+                        if(grafo.getAresta(j).getNivel()>=nivel || grafo.getAresta(j).getNivel()==-1)
                             grafo.getAresta(j).setNivel(0);
-                        }
-                        
                     }
-                    arestasAdd.get(nivel-1).setNivel(nivel);
-                    nivel=numeroDeArestas;
-                } else{
-                    System.out.println("continua");
-                    if (ultimoNivel == numeroDeArestas) {
-                        for (int j = 0; j < totalDeArestasDisponiveis; j++) {
-                            if (grafo.getAresta(j).getNivel()==numeroDeArestas) {
-                                grafo.getAresta(j).setNivel(0);
-                            }
-                        }
-
-                        arestasAdd.get(nivel-1).setNivel(nivel);
-                    }
+                    nivel = pilha.size();
+                    
+                    ultimoAdd = pilha.pop();
+                    index = arestas.indexOf(ultimoAdd);
+                    arestas.get(index).setNivel(nivel);
+                    System.out.println("Subindo o nivel: "+nivel);
+//                    System.out.println(arestas);
                 }
-//                
-            }
-
-//             Valida custo e quantidade de conexões da árvore/floresta gerada
-            boolean isArvoreValida = validarArvoreGeradora(grafo, conexoes); 
-            if (!isArvoreValida) {
-                System.out.println("\nNão atende aos critérios.");
-                return null;
-            }
-
-            // avisa ocorrencia de aresta invalida para refazer a arvore com outra combinacao
-            if (i == grafo.getTotalArestas() - 1 && numeroArestasAdicionadas < numeroDeArestas) {
+            }else if (numeroArestasAdicionadas < numeroDeArestas && i == totalDeArestasDisponiveis-1) {
+                System.out.println("caso sem arestas suficientes");
                 for (int j = 0; j < totalDeArestasDisponiveis; j++) {
-                    System.out.println(grafo.getAresta(j).getNivel());
-                }
-                System.out.println("mudou de nivel para o anterior - "+nivelAnterior);
-                for (int j = 0; j < totalDeArestasDisponiveis; j++) {
-                    if (grafo.getAresta(j).getNivel()>nivelAnterior || grafo.getAresta(j).getNivel()==-1) {
+                    if(grafo.getAresta(j).getNivel()>nivel || grafo.getAresta(j).getNivel()==-1)
                         grafo.getAresta(j).setNivel(0);
-                    }
                 }
-                arestasAdd.get(nivelAnterior-1).setNivel(nivelAnterior);
-                nivelAnterior--;
-                if(nivelAnterior==0){
-                    nivelAnterior=1;
-                }
-                for (int j = 0; j < totalDeArestasDisponiveis; j++) {
-                    System.out.println(grafo.getAresta(j).getNivel());
-                }
+                nivel = pilha.size();
+                Aresta ultimoAdd = pilha.pop();
+//                System.out.println("este - "+ultimoAdd);
+                int index = arestas.indexOf(ultimoAdd);
+                arestas.get(index).setNivel(nivel);
+                System.out.println("Subindo o nivel: "+nivel);
                 invalida = true;
+//                System.out.println(arestas);
             }
-                        
+            
             if (numeroArestasAdicionadas == numeroDeArestas) {
                 break;
             }
         }
         
-        return grafo;
+        return retorno;
     }
 }
