@@ -9,7 +9,6 @@ import java.util.List;
  */
 public class Casa {
     private int chave;
-    private List<Casa> filhos = new ArrayList<>();
     private Casa pai;
     private int conexoes;
 
@@ -24,18 +23,6 @@ public class Casa {
 
     public void setChave(int chave) {
         this.chave = chave;
-    }
-
-    public Casa getFilho(int num) {
-        return filhos.get(num);
-    }
-
-    public void setFilho(Casa filho) {
-        filhos.add(filho);
-    }
-
-    public int getQtdFilhos() {
-        return this.filhos.size();
     }
 
     public int getConexoes() {
