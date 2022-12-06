@@ -56,7 +56,8 @@ public class SolucaoNaoOrdenada extends Solucao {
         if (!obedeceLimite) {
             validacao = false;
         } else if (melhorOpcao != null) {
-            if (melhorOpcao.compareTo(arvoreGeradora) != menor) {
+            int comparacao = melhorOpcao.compareTo(arvoreGeradora);
+            if (comparacao == menor || comparacao == 0) {
                 validacao = false;
             }
         }
