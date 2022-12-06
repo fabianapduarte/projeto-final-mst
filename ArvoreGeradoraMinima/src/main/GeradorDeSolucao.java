@@ -21,6 +21,8 @@ public class GeradorDeSolucao {
             solucao = new SolucaoNaoOrdenada();
         } else {
             solucao = new SolucaoOrdenada();
+            System.out.println("Não implementada!");
+            System.exit(0);
         }   
         
         Grafo mst = solucao.gerarSolucao(grafo);

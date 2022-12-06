@@ -76,7 +76,6 @@ public class SolucaoNaoOrdenada extends Solucao {
         int totalDeArestasDisponiveis = grafo.getTotalArestas();
         int validas = 0;
         int deMesmoNivel = 0;
-        int ultimoNivel = 0;
         Grafo retorno = null;
         Stack<Aresta> pilha = new Stack<>();
         Collections.sort(arestas);
@@ -134,8 +133,6 @@ public class SolucaoNaoOrdenada extends Solucao {
                         validas++;
                     if (arestas.get(j).getNivel()==nivel)
                         deMesmoNivel++;
-                    if (arestas.get(j).getNivel()==numeroDeArestas)
-                        ultimoNivel++;
                 }
                 
                 // Valida custo e quantidade de conexões da árvore/floresta gerada
